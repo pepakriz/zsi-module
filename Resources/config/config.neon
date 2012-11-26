@@ -12,6 +12,16 @@ services:
 			- injectFactory(@cms.admin.ajaxFormFactory)
 		tags: [component]
 
+	zsi.productFormFactory:
+		class: ZsiModule\Forms\ProductFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+
+	zsi.tagFormFactory:
+		class: ZsiModule\Forms\TagFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+
 	cms.securityManager:
 		setup:
 			- addUserType(ZSI user, \ZsiModule\Entities\UserEntity, zsi.registrationUserFormFactory)
@@ -25,5 +35,28 @@ services:
 	zsi.productContent:
 		class: CmsModule\Content\ContentType('ZsiModule\Entities\PageEntity')
 		setup:
-			- addSection('Produkty', @cms.admin.ajaxFormFactory)
+			- addSection('Products', @zsi.productControlFactory)
+			- addSection('Tags', @zsi.tagControlFactory)
 		tags: [contentType: [name: 'ZSI page']]
+
+
+##
+# Repositories
+#
+	zsi.productRepository:
+		class: ZsiModule\Entities\ProductEntity
+		tags: [repository]
+
+	zsi.tagRepository:
+		class: ZsiModule\Entities\TagEntity
+		tags: [repository]
+
+
+factories:
+	zsi.productControl:
+		class: ZsiModule\Components\ProductControl(@zsi.productRepository)
+		tags: [component]
+
+	zsi.tagControl:
+		class: ZsiModule\Components\TagControl(@zsi.tagRepository)
+		tags: [component]

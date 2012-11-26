@@ -51,7 +51,7 @@ class ProductEntity extends NamedEntity
 
 	/**
 	 * @var ArrayCollection|TagEntity[]
-	 * @ManyToMany(targetEntity="TagEntity", inversedBy="products")
+	 * @ManyToMany(targetEntity="TagEntity", inversedBy="products", cascade={"all"}, orphanRemoval=true)
 	 * @JoinTable(
 	 *       joinColumns={@JoinColumn(onDelete="CASCADE")},
 	 *       inverseJoinColumns={@JoinColumn(onDelete="CASCADE")}
@@ -72,11 +72,18 @@ class ProductEntity extends NamedEntity
 	protected $comments;
 
 	/**
-	 * @var \CmsModule\Security\Entities\UserEntity
-	 * @ManyToOne(targetEntity="\CmsModule\Security\Entities\UserEntity", inversedBy="products")
+	 * @var UserEntity
+	 * @ManyToOne(targetEntity="UserEntity")
 	 * @JoinColumn(onDelete="SET NULL")
 	 */
 	protected $user;
+
+	/**
+	 * @var CompanyEntity
+	 * @ManyToOne(targetEntity="CompanyEntity")
+	 * @JoinColumn(onDelete="SET NULL")
+	 */
+	protected $company;
 
 	/**
 	 * @var \CmsModule\Content\Entities\FileEntity
@@ -226,7 +233,25 @@ class ProductEntity extends NamedEntity
 
 
 	/**
-	 * @param \CmsModule\Security\Entities\UserEntity $user
+	 * @param \ZsiModule\Entities\CompanyEntity $company
+	 */
+	public function setCompany($company)
+	{
+		$this->company = $company;
+	}
+
+
+	/**
+	 * @return \ZsiModule\Entities\CompanyEntity
+	 */
+	public function getCompany()
+	{
+		return $this->company;
+	}
+
+
+	/**
+	 * @param \ZsiModule\Entities\UserEntity $user
 	 */
 	public function setUser($user)
 	{
@@ -235,7 +260,7 @@ class ProductEntity extends NamedEntity
 
 
 	/**
-	 * @return \CmsModule\Security\Entities\UserEntity
+	 * @return \ZsiModule\Entities\UserEntity
 	 */
 	public function getUser()
 	{

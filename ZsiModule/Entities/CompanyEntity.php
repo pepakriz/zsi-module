@@ -29,12 +29,6 @@ class CompanyEntity extends BaseUserEntity
 	 */
 	protected $companyName;
 
-	/**
-	 * @var string
-	 * @Column(type="string")
-	 */
-	protected $companySurname;
-
 
 	/**
 	 * @param string $companyName
@@ -51,23 +45,5 @@ class CompanyEntity extends BaseUserEntity
 	public function getCompanyName()
 	{
 		return $this->companyName;
-	}
-
-
-	/**
-	 * @param string $companySurname
-	 */
-	public function setCompanySurname($companySurname)
-	{
-		$this->companySurname = $companySurname;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getCompanySurname()
-	{
-		return $this->companySurname;
 	}
 }

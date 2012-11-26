@@ -1,0 +1,18 @@
+services:
+
+	zsi.registrationUserFormFactory:
+		class: ZsiModule\Forms\UserFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+		tags: [component]
+
+	zsi.registrationCompanyFormFactory:
+		class: ZsiModule\Forms\CompanyFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+		tags: [component]
+
+	cms.securityManager:
+		setup:
+			- addUserType(ZSI user, \ZsiModule\Entities\UserEntity, zsi.registrationUserFormFactory)
+			- addUserType(ZSI company, \ZsiModule\Entities\CompanyEntity, zsi.registrationCompanyFormFactory)

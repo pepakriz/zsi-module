@@ -43,7 +43,7 @@ class ProductFormFactory extends FormFactory
 	{
 		$form->addGroup('Informations');
 		$form->addText('name', 'Name')->addRule($form::FILLED);
-		$form->addText('description', 'Description');
+		$form->addTextArea('description', 'Description');
 		$form->addCheckbox('enable', 'Enable');
 		$form->addFileEntityInput('photo', 'Photo');
 

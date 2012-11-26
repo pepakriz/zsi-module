@@ -52,7 +52,7 @@ class ScoreEntity extends NamedEntity
 
 	/**
 	 * @var UserEntity
-	 * @ManyToOne(targetEntity="UserEntity")
+	 * @ManyToOne(targetEntity="\CmsModule\Security\Entities\UserEntity")
 	 * @JoinColumn(onDelete="CASCADE")
 	 */
 	protected $user;

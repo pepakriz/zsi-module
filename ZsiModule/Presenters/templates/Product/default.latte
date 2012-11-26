@@ -2,4 +2,154 @@
 
 {block content}
 
-Hi!
+<h2>Search</h2>
+{control searchForm}
+
+
+{if $presenter->search}
+<h2>Products</h2>
+
+
+<ul class="media-list">
+	{foreach $presenter->getProducts() as $product}
+        {include #product product=>$product}
+	{/foreach}
+</ul>
+{/if}
+
+{snippet popup}
+	{if $presenter->product}
+		{var product=>$presenter->getCurrentProduct()}
+    <div class="modal modal-large">
+        <div class="modal-header">
+            <a n:href="show! product=>NULL" type="button" class="close" data-dismiss="modal"
+               aria-hidden="true">&times;</a>
+
+            <h3>{$product->name}</h3>
+        </div>
+        <div class="modal-body">
+
+			{if $product->photo}
+                <img class="media-object pull-right img-polaroid" n:src="$product->photo->getFileUrl(true), size=>'200x200'"
+                     alt="{$product->name}"/>
+			{/if}
+
+            <p>{$product->description}</p>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#comments" data-toggle="tab">Comments</a></li>
+                <li><a href="#products" data-toggle="tab">Similar products</a></li>
+                <li><a href="#score" data-toggle="tab">Score</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="comments">
+                    <h3>Comments</h3>
+
+					{if $presenter->user->isLoggedIn()}
+
+					{control commentForm}
+
+                    <ul class="media-list">
+						{foreach $product->getComments() as $comment}
+                            <li class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">{if $comment->user}{$comment->user->name}{else}Anonym{/if}</h4>
+
+                                    <div class="media">
+										{$comment->text}
+                                    </div>
+                                </div>
+                            </li>
+						{/foreach}
+                    </ul>
+					{else}
+					 You must be registered.
+					{/if}
+                </div>
+
+
+                <div class="tab-pane" id="products">
+                    <h3>Similar products</h3>
+
+                    <ul class="media-list">
+					{var cache=>array()}
+					{foreach $product->getTags() as $tag}
+						{foreach $tag->getProducts() as $product2}
+							{if $product2->id !== $product->id && !isset($cache[$product2->id])}
+							{include #product product=>$product2}
+							{var cache[$product2->id]=>true}
+							{/if}
+						{/foreach}
+					{/foreach}
+					</ul>
+
+                </div>
+
+                <div class="tab-pane" id="score">
+                    <h3>Score</h3>
+
+					{if $presenter->user->isLoggedIn()}
+
+						{control scoreForm}
+
+                        <ul class="media-list">
+							{foreach $product->getScores() as $score}
+                                <li class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{if $score->user}{$score->user->name}{else}Anonym{/if}</h4>
+
+                                        <div class="media">
+											{$score->scoreType->name}: {$score->score}
+                                        </div>
+                                    </div>
+                                </li>
+							{/foreach}
+                        </ul>
+						{else}
+                        You must be registered.
+					{/if}
+
+                </div>
+
+            </div>
+
+            <script>
+                $(function () {
+                    $('#myTab a:last').tab('show');
+                })
+            </script>
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <a n:href="show! product=>NULL" class="btn">Close</a>
+        </div>
+    </div>
+	{/if}
+{/snippet}
+
+{/block}
+
+{block #product}
+<li class="media">
+    <a class="pull-left" n:href="show! product=>$product->id">
+		{if $product->photo}
+            <img class="media-object" n:src="$product->photo->getFileUrl(true), size=>'50x50'"
+                 alt="{$product->name}"/>
+		{/if}
+    </a>
+
+    <div class="media-body">
+        <h4 class="media-heading"><a n:href="show! product=>$product->id">{$product->name}</a></h4>
+
+        <div class="media">
+			{$product->description}
+        </div>
+    </div>
+</li>
+{/block}

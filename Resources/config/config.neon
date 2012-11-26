@@ -37,6 +37,20 @@ services:
 		setup:
 			- injectFactory(@cms.admin.basicFormFactory)
 
+	zsi.frontCommentFormFactory:
+		class: ZsiModule\Forms\FrontCommentFormFactory
+		setup:
+			- injectFactory(@cms.admin.basicFormFactory)
+			- injectUser(@user)
+			- injectUserRepository(@cms.userRepository)
+
+	zsi.frontScoreFormFactory:
+		class: ZsiModule\Forms\FrontScoreFormFactory
+		setup:
+			- injectFactory(@cms.admin.basicFormFactory)
+			- injectUser(@user)
+			- injectUserRepository(@cms.userRepository)
+
 	cms.securityManager:
 		setup:
 			- addUserType(ZSI user, \ZsiModule\Entities\UserEntity, zsi.registrationUserFormFactory)
@@ -44,7 +58,7 @@ services:
 
 
 	zsi.productPresenter:
-		class: ZsiModule\Presenters\ProductPresenter
+		class: ZsiModule\Presenters\ProductPresenter(@zsi.productRepository)
 		tags: [presenter]
 
 	zsi.productContent:

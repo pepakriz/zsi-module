@@ -16,3 +16,14 @@ services:
 		setup:
 			- addUserType(ZSI user, \ZsiModule\Entities\UserEntity, zsi.registrationUserFormFactory)
 			- addUserType(ZSI company, \ZsiModule\Entities\CompanyEntity, zsi.registrationCompanyFormFactory)
+
+
+	zsi.productPresenter:
+		class: ZsiModule\Presenters\ProductPresenter
+		tags: [presenter]
+
+	zsi.productContent:
+		class: CmsModule\Content\ContentType('ZsiModule\Entities\PageEntity')
+		setup:
+			- addSection('Produkty', @cms.admin.ajaxFormFactory)
+		tags: [contentType: [name: 'ZSI page']]

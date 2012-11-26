@@ -25,7 +25,7 @@
             <a n:href="show! product=>NULL" type="button" class="close" data-dismiss="modal"
                aria-hidden="true">&times;</a>
 
-            <h3>{$product->name}</h3>
+            <h3>{$product->name} ({$product->score}%)</h3>
         </div>
         <div class="modal-body">
 
@@ -76,7 +76,7 @@
 					{var cache=>array()}
 					{foreach $product->getTags() as $tag}
 						{foreach $tag->getProducts() as $product2}
-							{if $product2->id !== $product->id && !isset($cache[$product2->id])}
+							{if $product2->id !== $product->id && !isset($cache[$product2->id]) && $product2->enable}
 							{include #product product=>$product2}
 							{var cache[$product2->id]=>true}
 							{/if}
@@ -145,7 +145,7 @@
     </a>
 
     <div class="media-body">
-        <h4 class="media-heading"><a n:href="show! product=>$product->id">{$product->name}</a></h4>
+        <h4 class="media-heading"><a n:href="show! product=>$product->id">{$product->name} ({$product->score}%)</a></h4>
 
         <div class="media">
 			{$product->description}

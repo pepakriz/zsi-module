@@ -12,6 +12,7 @@
 namespace ZsiModule\Forms;
 
 use Venne;
+use ZsiModule\Entities\ProductEntity;
 use Nette\Security\User;
 use CmsModule\Security\Repositories\UserRepository;
 use Venne\Forms\Form;
@@ -30,6 +31,9 @@ class FrontScoreFormFactory extends FormFactory
 
 	/** @var User */
 	protected $user;
+
+	/** @var ProductEntity */
+	protected $productEntity;
 
 
 	/**
@@ -51,12 +55,21 @@ class FrontScoreFormFactory extends FormFactory
 
 
 	/**
+	 * @param ProductEntity $productEntity
+	 */
+	public function setProductEntity(ProductEntity $productEntity)
+	{
+		$this->productEntity = $productEntity;
+	}
+
+
+	/**
 	 * @param Form $form
 	 */
 	public function configure(Form $form)
 	{
 		$form->addManyToOne('scoreType', 'Type')->setRequired();
-		$form->addSelect('score', 'Score')->setItems(array(0 => '', 1 => '*', 2 => '**', 3 => '***', 4 => '****', 5 => '*****'));
+		$form->addSelect('score', 'Score')->setItems(array(0 => '', 20 => '*', 40 => '**', 60 => '***', 80 => '****', 100 => '*****'));
 		$form->addSaveButton('Save');
 	}
 
@@ -64,6 +77,7 @@ class FrontScoreFormFactory extends FormFactory
 	public function handleSave(Form $form)
 	{
 		$form->data->user = $this->getCurrentUser();
+		$form->data->setProduct($this->productEntity);
 
 		parent::handleSave($form);
 	}

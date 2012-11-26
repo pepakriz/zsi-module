@@ -20,13 +20,14 @@ use DoctrineModule\Entities\NamedEntity;
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiScore")
+ * @HasLifecycleCallbacks
  */
 class ScoreEntity extends NamedEntity
 {
 
 	/**
 	 * @var DateTime
-	 * @Column(type="date")
+	 * @Column(type="datetime")
 	 */
 	protected $date;
 
@@ -65,6 +66,42 @@ class ScoreEntity extends NamedEntity
 	{
 		$this->name = '';
 		$this->date = new DateTime;
+	}
+
+
+	/**
+	 * Generate score.
+	 *
+	 * @PrePersist
+	 */
+	public function prePersist()
+	{
+		$this->product->generateScore();
+	}
+
+
+	/**
+	 * Generate score.
+	 *
+	 * @PreUpdate
+	 */
+	public function preUpdate()
+	{
+		$this->product->getScores()->removeElement($this);
+		$this->product->scores[] = $this;
+		$this->product->generateScore();
+	}
+
+
+	/**
+	 * Generate score.
+	 *
+	 * @PreRemove
+	 */
+	public function preRemove()
+	{
+		$this->product->getScores()->removeElement($this);
+		$this->product->generateScore();
 	}
 
 
@@ -110,6 +147,7 @@ class ScoreEntity extends NamedEntity
 	public function setProduct(ProductEntity $product = NULL)
 	{
 		$this->product = $product;
+		$this->product->scores[] = $this;
 	}
 
 

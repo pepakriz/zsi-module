@@ -44,9 +44,11 @@ class ScoreFormFactory extends FormFactory
 	{
 		$comments = $form->addMany('scores', function (Container $container) use ($form) {
 			$container->setCurrentGroup($container->form->addGroup('Score'));
-			$container->addManyToOne('scoreType', 'Type');
+			$container->addManyToOne('scoreType', 'Type')->addRule($form::FILLED);
 			$container->addManyToOne('user', 'User');
-			$container->addText('score', 'Score')->setRequired()->addRule($form::INTEGER);
+			$container->addSelect('score', 'Score')
+				->setItems(array(0 => '', 20 => '*', 40 => '**', 60 => '***', 80 => '****', 100 => '*****'))
+				->setRequired();
 
 			$container->addSubmit('remove', 'Remove')
 				->addRemoveOnClick();

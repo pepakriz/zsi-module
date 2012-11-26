@@ -132,10 +132,8 @@ class ProductPresenter extends PagePresenter
 	 */
 	protected function createComponentScoreForm()
 	{
-		$entity = new ScoreEntity;
-		$entity->setProduct($this->getCurrentProduct());
-
-		$form = $this->scoreFormFactory->invoke($entity);
+		$this->scoreFormFactory->setProductEntity($this->getCurrentProduct());
+		$form = $this->scoreFormFactory->invoke(new ScoreEntity);
 		$form->onSuccess[] = $this->processScoreForm;
 		return $form;
 	}
@@ -156,7 +154,7 @@ class ProductPresenter extends PagePresenter
 	 */
 	public function getProductsDql()
 	{
-		$dql = $this->productRepository->createQueryBuilder('a');
+		$dql = $this->productRepository->createQueryBuilder('a')->andWhere('a.enable = TRUE')->orderBy('a.score', 'DESC');
 
 		if ($this->search) {
 			$dql = $dql->andWhere('a.name LIKE :search')->orWhere('a.description LIKE :search')->setParameter('search', "%{$this->search}%");

@@ -32,7 +32,7 @@ class CommentEntity extends IdentifiedEntity
 
 	/**
 	 * @var DateTime
-	 * @Column(type="date")
+	 * @Column(type="datetime")
 	 */
 	protected $date;
 

@@ -32,7 +32,7 @@ class ProductEntity extends NamedEntity
 
 	/**
 	 * @var string
-	 * @Column(type="date")
+	 * @Column(type="datetime")
 	 */
 	protected $date;
 
@@ -47,6 +47,12 @@ class ProductEntity extends NamedEntity
 	 * @Column(type="text")
 	 */
 	protected $barcode = '';
+
+	/**
+	 * @var int
+	 * @Column(type="integer")
+	 */
+	protected $score = 0;
 
 
 	/**
@@ -103,6 +109,44 @@ class ProductEntity extends NamedEntity
 
 		$this->tags = new ArrayCollection;
 		$this->scores = new ArrayCollection;
+	}
+
+
+	/**
+	 * Generate score.
+	 */
+	public function generateScore()
+	{
+		$count = count($this->getScores());
+
+		$sum = 0;
+		foreach ($this->getScores() as $score) {
+			$sum += $score->getScore();
+		}
+
+		if ($count === 0) {
+			$this->score = 0;
+		} else {
+			$this->score = (int)($sum / $count);
+		}
+	}
+
+
+	/**
+	 * @param int $score
+	 */
+	public function setScore($score)
+	{
+		$this->score = $score;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getScore()
+	{
+		return $this->score;
 	}
 
 

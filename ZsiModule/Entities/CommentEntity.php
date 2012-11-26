@@ -12,6 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Nette\DateTime;
 use DoctrineModule\Entities\IdentifiedEntity;
 
 /**
@@ -30,6 +31,12 @@ class CommentEntity extends IdentifiedEntity
 	protected $text = '';
 
 	/**
+	 * @var DateTime
+	 * @Column(type="date")
+	 */
+	protected $date;
+
+	/**
 	 * @var ProductEntity
 	 * @ManyToOne(targetEntity="ProductEntity", inversedBy="comments")
 	 * @JoinColumn(onDelete="CASCADE")
@@ -38,7 +45,7 @@ class CommentEntity extends IdentifiedEntity
 
 	/**
 	 * @var UserEntity
-	 * @OneToOne(targetEntity="UserEntity")
+	 * @ManyToOne(targetEntity="UserEntity")
 	 * @JoinColumn(onDelete="CASCADE")
 	 */
 	protected $user;
@@ -49,7 +56,7 @@ class CommentEntity extends IdentifiedEntity
 	 */
 	public function __construct()
 	{
-		$this->name = '';
+		$this->date = new DateTime;
 	}
 
 
@@ -68,6 +75,24 @@ class CommentEntity extends IdentifiedEntity
 	public function getText()
 	{
 		return $this->text;
+	}
+
+
+	/**
+	 * @param \Nette\DateTime $date
+	 */
+	public function setDate($date)
+	{
+		$this->date = $date;
+	}
+
+
+	/**
+	 * @return \Nette\DateTime
+	 */
+	public function getDate()
+	{
+		return $this->date;
 	}
 
 
@@ -92,7 +117,7 @@ class CommentEntity extends IdentifiedEntity
 	/**
 	 * @param \ZsiModule\Entities\UserEntity $user
 	 */
-	public function setUser($user)
+	public function setUser(BaseUserEntity $user = NULL)
 	{
 		$this->user = $user;
 	}

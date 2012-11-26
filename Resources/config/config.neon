@@ -22,6 +22,21 @@ services:
 		setup:
 			- injectFactory(@cms.admin.ajaxFormFactory)
 
+	zsi.scoreTypeFormFactory:
+		class: ZsiModule\Forms\ScoreTypeFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+
+	zsi.commentsFormFactory:
+		class: ZsiModule\Forms\CommentsFormFactory
+		setup:
+			- injectFactory(@cms.admin.ajaxFormFactory)
+
+	zsi.scoreFormFactory:
+		class: ZsiModule\Forms\ScoreFormFactory
+		setup:
+			- injectFactory(@cms.admin.basicFormFactory)
+
 	cms.securityManager:
 		setup:
 			- addUserType(ZSI user, \ZsiModule\Entities\UserEntity, zsi.registrationUserFormFactory)
@@ -37,6 +52,7 @@ services:
 		setup:
 			- addSection('Products', @zsi.productControlFactory)
 			- addSection('Tags', @zsi.tagControlFactory)
+			- addSection('Score types', @zsi.scoreTypeControlFactory)
 		tags: [contentType: [name: 'ZSI page']]
 
 
@@ -51,6 +67,10 @@ services:
 		class: ZsiModule\Entities\TagEntity
 		tags: [repository]
 
+	zsi.scoreTypeRepository:
+		class: ZsiModule\Entities\ScoreTypeEntity
+		tags: [repository]
+
 
 factories:
 	zsi.productControl:
@@ -59,4 +79,8 @@ factories:
 
 	zsi.tagControl:
 		class: ZsiModule\Components\TagControl(@zsi.tagRepository)
+		tags: [component]
+
+	zsi.scoreTypeControl:
+		class: ZsiModule\Components\ScoreTypeControl(@zsi.scoreTypeRepository)
 		tags: [component]

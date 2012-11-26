@@ -61,13 +61,13 @@ class ProductEntity extends NamedEntity
 
 	/**
 	 * @var ArrayCollection|ScoreEntity[]
-	 * @OneToMany(targetEntity="ScoreEntity", mappedBy="product")
+	 * @OneToMany(targetEntity="ScoreEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
 	 */
 	protected $scores;
 
 	/**
 	 * @var ArrayCollection|CommentEntity[]
-	 * @OneToMany(targetEntity="CommentEntity", mappedBy="product")
+	 * @OneToMany(targetEntity="CommentEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
 	 */
 	protected $comments;
 

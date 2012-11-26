@@ -12,6 +12,8 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use CmsModule\Security\Entities\UserEntity;
+use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
@@ -21,6 +23,18 @@ use DoctrineModule\Entities\NamedEntity;
  */
 class ScoreEntity extends NamedEntity
 {
+
+	/**
+	 * @var DateTime
+	 * @Column(type="date")
+	 */
+	protected $date;
+
+	/**
+	 * @var int
+	 * @Column(type="integer")
+	 */
+	protected $score = 0;
 
 	/**
 	 * @var ProductEntity
@@ -36,6 +50,13 @@ class ScoreEntity extends NamedEntity
 	 */
 	protected $scoreType;
 
+	/**
+	 * @var UserEntity
+	 * @ManyToOne(targetEntity="UserEntity")
+	 * @JoinColumn(onDelete="CASCADE")
+	 */
+	protected $user;
+
 
 	/**
 	 * Construct.
@@ -43,6 +64,43 @@ class ScoreEntity extends NamedEntity
 	public function __construct()
 	{
 		$this->name = '';
+		$this->date = new DateTime;
+	}
+
+
+	/**
+	 * @param \Nette\DateTime $date
+	 */
+	public function setDate($date)
+	{
+		$this->date = $date;
+	}
+
+
+	/**
+	 * @return \Nette\DateTime
+	 */
+	public function getDate()
+	{
+		return $this->date;
+	}
+
+
+	/**
+	 * @param int $score
+	 */
+	public function setScore($score)
+	{
+		$this->score = $score;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getScore()
+	{
+		return $this->score;
 	}
 
 
@@ -79,5 +137,23 @@ class ScoreEntity extends NamedEntity
 	public function getScoreType()
 	{
 		return $this->scoreType;
+	}
+
+
+	/**
+	 * @param \ZsiModule\Entities\UserEntity $user
+	 */
+	public function setUser(UserEntity $user = NULL)
+	{
+		$this->user = $user;
+	}
+
+
+	/**
+	 * @return \ZsiModule\Entities\UserEntity
+	 */
+	public function getUser()
+	{
+		return $this->user;
 	}
 }

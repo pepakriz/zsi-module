@@ -15,6 +15,8 @@ use Venne;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
+ * Entity for type of rating.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiScoreType")

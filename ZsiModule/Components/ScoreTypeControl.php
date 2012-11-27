@@ -18,6 +18,8 @@ use CmsModule\Content\SectionControl;
 
 
 /**
+ * Control for editing score types.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  */
 class ScoreTypeControl extends SectionControl
@@ -43,6 +45,9 @@ class ScoreTypeControl extends SectionControl
 	}
 
 
+	/**
+	 * @return \CmsModule\Components\Table\TableControl
+	 */
 	public function createComponentTable()
 	{
 		$table = new \CmsModule\Components\Table\TableControl;

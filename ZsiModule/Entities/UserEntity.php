@@ -15,6 +15,8 @@ use Venne;
 
 
 /**
+ * Entity for user.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiUser")

@@ -16,6 +16,8 @@ use Nette\DateTime;
 use DoctrineModule\Entities\IdentifiedEntity;
 
 /**
+ * Comment of user about product.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiComment")

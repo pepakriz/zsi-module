@@ -21,6 +21,8 @@ use Venne\Forms\Form;
 use CmsModule\Content\Presenters\PagePresenter;
 
 /**
+ * Presenter for frontend.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  */
 class ProductPresenter extends PagePresenter

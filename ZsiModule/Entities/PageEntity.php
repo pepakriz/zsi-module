@@ -14,6 +14,8 @@ namespace ZsiModule\Entities;
 use Venne;
 
 /**
+ * Entity for page.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\CmsModule\Content\Repositories\PageRepository")
  * @Table(name="zsiPage")

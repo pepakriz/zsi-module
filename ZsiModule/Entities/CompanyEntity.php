@@ -15,6 +15,8 @@ use Venne;
 
 
 /**
+ * User's company, if he has any.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiCompanyUser")

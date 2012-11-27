@@ -17,6 +17,8 @@ use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
+ * Information about product. It is connected with score, tag, user etc. entities.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiProduct")

@@ -17,6 +17,8 @@ use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
+ * Score of particular product.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiScore")

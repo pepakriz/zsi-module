@@ -17,6 +17,8 @@ use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
+ * Represents tags of products.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
  * @Table(name="zsiTag")

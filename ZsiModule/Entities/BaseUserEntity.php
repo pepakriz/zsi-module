@@ -15,6 +15,8 @@ use Venne;
 
 
 /**
+ * Base entity for user and company.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  */
 class BaseUserEntity extends \CmsModule\Security\Entities\UserEntity

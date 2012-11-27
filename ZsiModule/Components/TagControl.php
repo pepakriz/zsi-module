@@ -18,6 +18,8 @@ use CmsModule\Content\SectionControl;
 
 
 /**
+ * Control for editing tags.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  */
 class TagControl extends SectionControl
@@ -43,6 +45,9 @@ class TagControl extends SectionControl
 	}
 
 
+	/**
+	 * @return \CmsModule\Components\Table\TableControl
+	 */
 	public function createComponentTable()
 	{
 		$table = new \CmsModule\Components\Table\TableControl;

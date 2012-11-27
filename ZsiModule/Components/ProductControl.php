@@ -20,6 +20,8 @@ use CmsModule\Content\SectionControl;
 
 
 /**
+ * Control for editing products.
+ *
  * @author Josef Kříž <pepakriz@gmail.com>
  */
 class ProductControl extends SectionControl
@@ -55,6 +57,9 @@ class ProductControl extends SectionControl
 	}
 
 
+	/**
+	 * @return \CmsModule\Components\Table\TableControl
+	 */
 	public function createComponentTable()
 	{
 		$table = new \CmsModule\Components\Table\TableControl;
@@ -72,9 +77,8 @@ class ProductControl extends SectionControl
 		$table->addButtonCreate('create', 'Create new', $form, 'file');
 
 		// columns
-		$table->addColumn('name', 'Name', '100%');
-		//$table->addColumn('alias', 'Alias', '20%');
-		//$table->addColumn('short', 'Short', '30%');
+		$table->addColumn('name', 'Name', '80%');
+		$table->addColumn('score', 'Score', '20%');
 
 		// actions
 		$table->addActionEdit('edit', 'Edit', $form);

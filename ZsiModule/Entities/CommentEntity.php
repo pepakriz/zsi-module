@@ -12,6 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Doctrine\ORM\Mapping as ORM;
 use Nette\DateTime;
 use DoctrineModule\Entities\IdentifiedEntity;
 
@@ -19,8 +20,8 @@ use DoctrineModule\Entities\IdentifiedEntity;
  * Comment of user about product.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiComment")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiComment")
  */
 class CommentEntity extends IdentifiedEntity
 {
@@ -28,27 +29,27 @@ class CommentEntity extends IdentifiedEntity
 
 	/**
 	 * @var string
-	 * @Column(type="text")
+	 * @ORM\Column(type="text")
 	 */
 	protected $text = '';
 
 	/**
 	 * @var DateTime
-	 * @Column(type="datetime")
+	 * @ORM\Column(type="datetime")
 	 */
 	protected $date;
 
 	/**
 	 * @var ProductEntity
-	 * @ManyToOne(targetEntity="ProductEntity", inversedBy="comments")
-	 * @JoinColumn(onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="ProductEntity", inversedBy="comments")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $product;
 
 	/**
 	 * @var UserEntity
-	 * @ManyToOne(targetEntity="UserEntity")
-	 * @JoinColumn(onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="UserEntity")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $user;
 

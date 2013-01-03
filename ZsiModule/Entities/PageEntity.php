@@ -12,14 +12,15 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entity for page.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\CmsModule\Content\Repositories\PageRepository")
- * @Table(name="zsiPage")
- * @DiscriminatorEntry(name="zsiPage")
+ * @ORM\Entity(repositoryClass="\CmsModule\Content\Repositories\PageRepository")
+ * @ORM\Table(name="zsiPage")
+ * @ORM\DiscriminatorEntry(name="zsiPage")
  */
 class PageEntity extends \CmsModule\Content\Entities\PageEntity
 {

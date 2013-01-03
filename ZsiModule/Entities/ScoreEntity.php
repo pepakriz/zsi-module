@@ -12,7 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
-use CmsModule\Security\Entities\UserEntity;
+use Doctrine\ORM\Mapping as ORM;
 use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
 
@@ -20,43 +20,43 @@ use DoctrineModule\Entities\NamedEntity;
  * Score of particular product.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiScore")
- * @HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiScore")
+ * @ORM\HasLifecycleCallbacks
  */
 class ScoreEntity extends NamedEntity
 {
 
 	/**
 	 * @var DateTime
-	 * @Column(type="datetime")
+	 * @ORM\Column(type="datetime")
 	 */
 	protected $date;
 
 	/**
 	 * @var int
-	 * @Column(type="integer")
+	 * @ORM\Column(type="integer")
 	 */
 	protected $score = 0;
 
 	/**
 	 * @var ProductEntity
-	 * @ManyToOne(targetEntity="ProductEntity", inversedBy="scores")
-	 * @JoinColumn(onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="ProductEntity", inversedBy="scores")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $product;
 
 	/**
 	 * @var ScoreTypeEntity
-	 * @ManyToOne(targetEntity="ScoreTypeEntity", inversedBy="scores")
-	 * @JoinColumn(onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="ScoreTypeEntity", inversedBy="scores")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $scoreType;
 
 	/**
 	 * @var UserEntity
-	 * @ManyToOne(targetEntity="\CmsModule\Security\Entities\UserEntity")
-	 * @JoinColumn(onDelete="CASCADE")
+	 * @ORM\ManyToOne(targetEntity="\CmsModule\Security\Entities\UserEntity")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $user;
 
@@ -74,7 +74,7 @@ class ScoreEntity extends NamedEntity
 	/**
 	 * Generate score.
 	 *
-	 * @PrePersist
+	 * @ORM\PrePersist
 	 */
 	public function prePersist()
 	{
@@ -85,7 +85,7 @@ class ScoreEntity extends NamedEntity
 	/**
 	 * Generate score.
 	 *
-	 * @PreUpdate
+	 * @ORM\PreUpdate
 	 */
 	public function preUpdate()
 	{
@@ -98,7 +98,7 @@ class ScoreEntity extends NamedEntity
 	/**
 	 * Generate score.
 	 *
-	 * @PreRemove
+	 * @ORM\PreRemove
 	 */
 	public function preRemove()
 	{

@@ -12,22 +12,22 @@
 namespace ZsiModule\Entities;
 
 use Venne;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User's company, if he has any.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiCompanyUser")
- * @DiscriminatorEntry(name="zsiCompanyUserEntity")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiCompanyUser")
+ * @ORM\DiscriminatorEntry(name="zsiCompanyUserEntity")
  */
 class CompanyEntity extends BaseUserEntity
 {
 
 	/**
 	 * @var string
-	 * @Column(type="string")
+	 * @ORM\Column(type="string")
 	 */
 	protected $companyName;
 

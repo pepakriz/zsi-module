@@ -12,15 +12,15 @@
 namespace ZsiModule\Entities;
 
 use Venne;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entity for user.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiUser")
- * @DiscriminatorEntry(name="zsiUserEntity")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiUser")
+ * @ORM\DiscriminatorEntry(name="zsiUserEntity")
  */
 class UserEntity extends BaseUserEntity
 {

@@ -12,6 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
@@ -20,83 +21,83 @@ use DoctrineModule\Entities\NamedEntity;
  * Information about product. It is connected with score, tag, user etc. entities.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiProduct")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiProduct")
  */
 class ProductEntity extends NamedEntity
 {
 
 	/**
 	 * @var string
-	 * @Column(type="text")
+	 * @ORM\Column(type="text")
 	 */
 	protected $description = '';
 
 	/**
 	 * @var string
-	 * @Column(type="datetime")
+	 * @ORM\Column(type="datetime")
 	 */
 	protected $date;
 
 	/**
 	 * @var bool
-	 * @Column(type="boolean")
+	 * @ORM\Column(type="boolean")
 	 */
 	protected $enable = false;
 
 	/**
 	 * @var string
-	 * @Column(type="text")
+	 * @ORM\Column(type="text")
 	 */
 	protected $barcode = '';
 
 	/**
 	 * @var int
-	 * @Column(type="integer")
+	 * @ORM\Column(type="integer")
 	 */
 	protected $score = 0;
 
 
 	/**
 	 * @var ArrayCollection|TagEntity[]
-	 * @ManyToMany(targetEntity="TagEntity", inversedBy="products", cascade={"all"}, orphanRemoval=true)
-	 * @JoinTable(
-	 *       joinColumns={@JoinColumn(onDelete="CASCADE")},
-	 *       inverseJoinColumns={@JoinColumn(onDelete="CASCADE")}
+	 * @ORM\ManyToMany(targetEntity="TagEntity", inversedBy="products", cascade={"all"}, orphanRemoval=true)
+	 * @ORM\JoinTable(
+	 *       joinColumns={@ORM\JoinColumn(onDelete="CASCADE")},
+	 *       inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
 	 *       )
 	 */
 	protected $tags;
 
 	/**
 	 * @var ArrayCollection|ScoreEntity[]
-	 * @OneToMany(targetEntity="ScoreEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="ScoreEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
 	 */
 	protected $scores;
 
 	/**
 	 * @var ArrayCollection|CommentEntity[]
-	 * @OneToMany(targetEntity="CommentEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="CommentEntity", mappedBy="product", cascade={"all"}, orphanRemoval=true)
 	 */
 	protected $comments;
 
 	/**
 	 * @var UserEntity
-	 * @ManyToOne(targetEntity="UserEntity")
-	 * @JoinColumn(onDelete="SET NULL")
+	 * @ORM\ManyToOne(targetEntity="UserEntity")
+	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $user;
 
 	/**
 	 * @var CompanyEntity
-	 * @ManyToOne(targetEntity="CompanyEntity")
-	 * @JoinColumn(onDelete="SET NULL")
+	 * @ORM\ManyToOne(targetEntity="CompanyEntity")
+	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $company;
 
 	/**
 	 * @var \CmsModule\Content\Entities\FileEntity
-	 * @OneToOne(targetEntity="\CmsModule\Content\Entities\FileEntity", cascade={"all"}, orphanRemoval=true)
-	 * @JoinColumn(onDelete="SET NULL")
+	 * @ORM\OneToOne(targetEntity="\CmsModule\Content\Entities\FileEntity", cascade={"all"}, orphanRemoval=true)
+	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $photo;
 

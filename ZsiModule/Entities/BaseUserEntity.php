@@ -12,7 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Base entity for user and company.
@@ -24,20 +24,20 @@ class BaseUserEntity extends \CmsModule\Security\Entities\UserEntity
 
 	/**
 	 * @var string
-	 * @Column(type="string")
+	 * @ORM\Column(type="string")
 	 */
 	protected $name;
 
 	/**
 	 * @var string
-	 * @Column(type="string")
+	 * @ORM\Column(type="string")
 	 */
 	protected $surname;
 
 
 	/**
 	 * @var ArrayCollection|ProductEntity[]
-	 * @OneToMany(targetEntity="ProductEntity", mappedBy="user")
+	 * @ORM\OneToMany(targetEntity="ProductEntity", mappedBy="user")
 	 */
 	protected $products;
 

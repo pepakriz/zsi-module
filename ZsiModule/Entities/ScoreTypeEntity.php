@@ -12,21 +12,22 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Doctrine\ORM\Mapping as ORM;
 use DoctrineModule\Entities\NamedEntity;
 
 /**
  * Entity for type of rating.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiScoreType")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiScoreType")
  */
 class ScoreTypeEntity extends NamedEntity
 {
 
 	/**
 	 * @var ArrayCollection|ScoreEntity[]
-	 * @OneToMany(targetEntity="ScoreEntity", mappedBy="scoreType")
+	 * @ORM\OneToMany(targetEntity="ScoreEntity", mappedBy="scoreType")
 	 */
 	protected $scores;
 

@@ -12,6 +12,7 @@
 namespace ZsiModule\Entities;
 
 use Venne;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Nette\DateTime;
 use DoctrineModule\Entities\NamedEntity;
@@ -20,15 +21,15 @@ use DoctrineModule\Entities\NamedEntity;
  * Represents tags of products.
  *
  * @author Josef Kříž <pepakriz@gmail.com>
- * @Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
- * @Table(name="zsiTag")
+ * @ORM\Entity(repositoryClass="\DoctrineModule\Repositories\BaseRepository")
+ * @ORM\Table(name="zsiTag")
  */
 class TagEntity extends NamedEntity
 {
 
 	/**
 	 * @var ProductEntity[]|ArrayCollection|array
-	 * @ManyToMany(targetEntity="ProductEntity", mappedBy="tags")
+	 * @ORM\ManyToMany(targetEntity="ProductEntity", mappedBy="tags")
 	 */
 	protected $products;
 

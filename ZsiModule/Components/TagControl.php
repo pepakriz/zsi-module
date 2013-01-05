@@ -53,8 +53,6 @@ class TagControl extends SectionControl
 		$table = new \CmsModule\Components\Table\TableControl;
 		$table->setTemplateConfigurator($this->templateConfigurator);
 		$table->setRepository($this->tagRepository);
-		$table->setPaginator(10);
-		$table->enableSorter();
 
 		// forms
 		$form = $table->addForm($this->tagFormFactory, 'Tag');
@@ -63,7 +61,10 @@ class TagControl extends SectionControl
 		$table->addButtonCreate('create', 'Create new', $form, 'file');
 
 		// columns
-		$table->addColumn('name', 'Name', '100%');
+		$table->addColumn('name', 'Name')
+			->setWidth('100%')
+			->setSortable(TRUE)
+			->setFilter();
 
 		// actions
 		$table->addActionEdit('edit', 'Edit', $form);

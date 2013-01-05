@@ -65,8 +65,6 @@ class ProductControl extends SectionControl
 		$table = new \CmsModule\Components\Table\TableControl;
 		$table->setTemplateConfigurator($this->templateConfigurator);
 		$table->setRepository($this->productRepository);
-		$table->setPaginator(10);
-		$table->enableSorter();
 
 		// forms
 		$form = $table->addForm($this->productFormFactory, 'Product');
@@ -77,8 +75,12 @@ class ProductControl extends SectionControl
 		$table->addButtonCreate('create', 'Create new', $form, 'file');
 
 		// columns
-		$table->addColumn('name', 'Name', '80%');
-		$table->addColumn('score', 'Score', '20%');
+		$table->addColumn('name', 'Name')
+			->setWidth('80%')
+			->setSortable(TRUE)
+			->setFilter();
+		$table->addColumn('score', 'Score')
+			->setWidth('20%');
 
 		// actions
 		$table->addActionEdit('edit', 'Edit', $form);
